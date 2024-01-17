@@ -233,7 +233,7 @@ class CodeWriter:
                             // addr <- lcl + i
                             @{index}
                             D = A
-                            @Foo.{seg}
+                            @Foo.{index}
                             D = D + M
                             @R13 // holds addr
                             M = D
