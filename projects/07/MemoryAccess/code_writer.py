@@ -1,9 +1,8 @@
 
 class CodeWriter:
-    def __init__(self) -> None:
-        self.file = open('BasicTest/BasicTest.asm', 'w', encoding='UTF-8')
+    def __init__(self, filename: str) -> None:
+        self.file = open(f"{filename.split('.')[0]}.asm", 'w', encoding='UTF-8')
     
-
     def write_arithmetic(self, cmd: str) -> None:
         if cmd == 'add':
             self.file.write(f"""//add
@@ -263,7 +262,6 @@ class CodeWriter:
                             // SP++
                             @SP
                             M = M + 1\n\n""".replace(" ", ""))
-    
         elif cmd == 'pop' and segment == 'temp':
             self.file.write(f"""// pop-temp-i
                             // addr <- lcl + i

@@ -2,13 +2,14 @@ from code_writer import CodeWriter
 
 class CParser:
 
-    def __init__(self, file: str) -> None:
+    def __init__(self, filename: str, file: str) -> None:
+        self.filename = filename
         self.file = file
 
     def parse(self):
         self.file = self.file.split('\r\n')
 
-        code_writer = CodeWriter()
+        code_writer = CodeWriter(filename=self.filename)
         for line in self.file:
             # ignores EOF, white space, and comments
             if len(line) == 0 or line[0] == ' ' or (line[0] == '/' and line[1] == '/'):

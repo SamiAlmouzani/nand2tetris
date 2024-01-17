@@ -11,5 +11,5 @@ if __name__ == '__main__':
         print(f"Usage python3 main.py [file.vm]")
         exit()
 
-    parser: CParser = CParser(file_contents.decode(sys.getdefaultencoding()))
+    parser: CParser = CParser(filename=sys.argv[1], file=file_contents.decode(sys.getdefaultencoding()))
     parser.parse()
