@@ -280,7 +280,53 @@ class CodeWriter:
                             @R13
                             A = M
                             M = D\n\n""".replace(" ", ""))
-   
+        elif cmd == 'push' and segment == 'pointer' and index == "0":
+            seg = 'THIS'
+            self.file.write(f"""
+                            //push-pointer-0
+                            @{seg}
+                            D = M
+                            @SP
+                            A = M
+                            M = D//*SP=THIS
+                            @SP
+                            M = M + 1//SP++\n\n""".replace(" ", ""))
+    
+        elif cmd == 'pop' and segment == 'pointer' and index == "0":
+            seg = 'THIS'
+            self.file.write(f"""
+                            //pop-pointer-0
+                            @SP
+                            M = M - 1
+                            A = M
+                            D = M
+                            @{seg}
+                            M = D\n\n""".replace(" ", ""))
+
+
+        elif cmd == 'push' and segment == 'pointer' and index == "1":
+            seg = 'THAT'
+            self.file.write(f"""
+                            //push-pointer-1
+                            @{seg}
+                            D = M
+                            @SP
+                            A = M
+                            M = D//*SP=THAT
+                            @SP
+                            M = M + 1//SP++\n\n""".replace(" ", ""))
+
+        elif cmd == 'pop' and segment == 'pointer' and index == "1":
+            seg = 'THAT'
+            self.file.write(f"""
+                            //pop-pointer-1
+                            @SP
+                            M = M - 1
+                            A = M 
+                            D = M
+                            @{seg}
+                            M = D\n\n""".replace(" ", ""))
+
     def close(self) -> None:
         self.file.write(f"""(END)
                             @END
